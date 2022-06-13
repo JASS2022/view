@@ -5,10 +5,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build-wasm": "cd swiftwasm && PATH=/Library/Developer/Toolchains/swift-latest.xctoolchain/usr/bin:\"${PATH}\" swift build --triple wasm32-unknown-wasi && mv .build/debug/swiftwasm.wasm ../add.wasm",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@wasmer/wasi": "^1.0.2",
+    "@wasmer/wasmfs": "^0.12.0",
     "next": "12.1.6",
     "react": "18.1.0",
     "react-dom": "18.1.0"

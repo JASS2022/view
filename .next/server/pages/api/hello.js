@@ -1,11 +1,14 @@
 "use strict";
 (() => {
 var exports = {};
-exports.id = 453;
-exports.ids = [453];
+exports.id = "pages/api/hello";
+exports.ids = ["pages/api/hello"];
 exports.modules = {
 
-/***/ 641:
+/***/ "(api)/./pages/api/hello.ts":
+/*!****************************!*\
+  !*** ./pages/api/hello.ts ***!
+  \****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -28,7 +31,7 @@ function handler(req, res) {
 var __webpack_require__ = require("../../webpack-api-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = (__webpack_exec__(641));
+var __webpack_exports__ = (__webpack_exec__("(api)/./pages/api/hello.ts"));
 module.exports = __webpack_exports__;
 
 })();
