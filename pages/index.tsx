@@ -6,31 +6,6 @@ import React from "react";
 import { useRef, useContext, useEffect } from "react";
 import { DataContext } from "../context/dataprovider";
 
-const items = [
-  {
-    id: "uuid-1",
-    name: "Duckie_1",
-    picture: "base64",
-    lastSeen: "10:30:20/10/2022",
-    trip: {
-      // null if it isn't on a trip
-      start: 3, // Let's do an array of tiles that the route takes
-      destination: 1,
-    },
-  },
-  {
-    id: "uuid-2",
-    name: "Duckie_2",
-    picture: "base64",
-    lastSeen: "10:30:20/10/2022",
-    trip: {
-      // null if it isn't on a trip
-      start: 2, // Let's do an array of tiles that the route takes
-      destination: 3,
-    },
-  },
-];
-
 const cellMap: any = {
   xy: {
     "02": [350, 200],
@@ -52,8 +27,8 @@ const Home: NextPage = () => {
   const { state, fetchData } = useContext<any>(DataContext);
 
   const mapped: any =
-    items[0].trip.start.toString() + items[0].trip.destination.toString();
-  console.log(mapped);
+    (state.duckies[0]?.location.x.toString() || "1") +
+    (state.duckies[0]?.location.y.toString() || "1");
   // (state.duckies[0]?.location.x.toString() || "1") + (state.duckies[0]?.location.y.toString() || "1");
 
   React.useEffect(() => {
@@ -315,6 +290,11 @@ const Home: NextPage = () => {
                       <text
                         style={{ fontWeight: 600 }}
                       >{`lastSeen: ${item.lastSeen}`}</text>
+                    </div>
+                    <div className={styles.textDiv}>
+                      <text
+                        style={{ fontWeight: 600 }}
+                      >{`lastSeen: ${item.location.x} ${item.location.y}`}</text>
                     </div>
                   </div>
                 );
