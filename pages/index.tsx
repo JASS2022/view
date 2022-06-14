@@ -14,8 +14,8 @@ const items = [
     lastSeen: "10:30:20/10/2022",
     trip: {
       // null if it isn't on a trip
-      start: 0, // Let's do an array of tiles that the route takes
-      destination: 2,
+      start: 3, // Let's do an array of tiles that the route takes
+      destination: 1,
     },
   },
   {
@@ -25,8 +25,8 @@ const items = [
     lastSeen: "10:30:20/10/2022",
     trip: {
       // null if it isn't on a trip
-      start: 3, // Let's do an array of tiles that the route takes
-      destination: 5,
+      start: 2, // Let's do an array of tiles that the route takes
+      destination: 3,
     },
   },
 ];
@@ -42,19 +42,22 @@ const cellMap: any = {
     "31": [500, 650],
     "32": [396, 650],
     "33": [256, 650],
-    "20": [510, 650],
+    "20": [650, 510],
     "24": [100, 510],
   },
 };
 console.log(cellMap.xy["11"][0]);
 
 const Home: NextPage = () => {
-  const { state, fetchData } = useContext(DataContext);
+  const { state, fetchData } = useContext<any>(DataContext);
 
-  const mapped: any = (state.duckies[0]?.location.x.toString() || "1") + (state.duckies[0]?.location.y.toString() || "1");
+  const mapped: any =
+    items[0].trip.start.toString() + items[0].trip.destination.toString();
+  console.log(mapped);
+  // (state.duckies[0]?.location.x.toString() || "1") + (state.duckies[0]?.location.y.toString() || "1");
 
   React.useEffect(() => {
-    fetchData()
+    fetchData();
   }, []);
 
   const reffy = useRef();
