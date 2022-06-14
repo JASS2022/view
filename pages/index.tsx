@@ -186,7 +186,7 @@ const Home: NextPage = () => {
           <div className={styles.right}>
             <text className={styles.header}>Duckie UI</text>
             <div className={styles.innerRight}>
-              {items.map((item) => {
+              {state.duckies.map((item: any) => {
                 return (
                   <div className={styles.duckieData}>
                     <text className={styles.innerTitle}>{item.name}</text>

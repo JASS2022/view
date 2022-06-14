@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSetState } from 'react-use';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
+import { useContext } from "react";
 
 export const DataContext = React.createContext(null);
 
@@ -70,12 +71,16 @@ export const ContextProvider = props => {
                     locationUpdateData["lastSeen"] = new Date()
 
                     setDuckies([...state.duckies, locationUpdateData])
+                    console.log("Set new Duckie Location update")
+                    console.log(state.duckies)
                 } else {
                     setDuckies(
                         state.duckies.map(existingDuck => {
                             return (locationUpdateData.id === existingDuck.id) ? mergeJSONs(existingDuck, locationUpdateData) : existingDuck
                         })
                     )
+                    console.log("Updated Duckie Location")
+                    console.log(state.duckies)
                 }
 
                 break;
