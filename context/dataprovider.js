@@ -17,7 +17,7 @@ const initialState = {
 export const ContextProvider = props => {
     const [state, setState] = useSetState(initialState);
 
-    const setDuckies = (dukies) => setState({ dukies });
+    const setDuckies = (duckies) => setState({ duckies });
     const setRoundabouts = (roundabouts) => setState({ roundabouts });
     const setWsInstance = (wsInstance) => setState({ wsInstance });
 
@@ -27,6 +27,7 @@ export const ContextProvider = props => {
             client.onopen = onOpen
             client.onmessage = onMessage
             client.onError = onError
+            client.onClose = onClose
             setWsInstance(client)
         }
     }
@@ -38,21 +39,52 @@ export const ContextProvider = props => {
 
     //An event listener to be called when a message is received from the server
     function onMessage(event) {
-        const data = JSON.parse(event.data)
-        console.log(data)
+        const jsonData = JSON.parse(event.data)
+        console.log(jsonData)
 
-        switch (data.type) {
-            case "locationUpdate":
-
-
-
-                break;
+        switch (jsonData.type) {
             case "allDuckies":
-                // code block
+                const allDuckiesData = jsonData.data
+                data.map(duck => {
+                    const existingDuckiesIds = state.duckies.map(duck => duck.id)
+                    if (!existingDuckiesIds.includes(duck.id)) {
+                        setDuckies([...state.duckies, duck])
+                    } else {
+                        setDuckies(
+                            state.duckies.map(existingDuck => {
+                                return (duck.id === existingDuck.id) ? mergeJSONs(existingDuck, duck) : existingDuck
+                            })
+                        )
+                    }
+                })
+
                 break;
+
+            case "locationUpdate":
+                const locationUpdateData = jsonData.data
+
+                const existingDuckiesIds = state.duckies.map(duck => duck.id)
+                if (!existingDuckiesIds.includes(locationUpdateData.id)) {
+                    locationUpdateData["name"] = "Duckie"
+                    locationUpdateData["picture"] = null
+                    locationUpdateData["lastSeen"] = new Date()
+
+                    setDuckies([...state.duckies, locationUpdateData])
+                } else {
+                    setDuckies(
+                        state.duckies.map(existingDuck => {
+                            return (locationUpdateData.id === existingDuck.id) ? mergeJSONs(existingDuck, locationUpdateData) : existingDuck
+                        })
+                    )
+                }
+
+                break;
+
             default:
                 console.log("unknowen event type")
-                console.log(data)
+                console.log(jsonData)
+
+                console.log(state)
         }
     }
 
@@ -64,6 +96,19 @@ export const ContextProvider = props => {
     //An event listener to be called when the WebSocket connection's readyState changes to CLOSED.
     function onClose(event) {
         console.log(JSON.stringify(event.data));
+    }
+
+    const mergeJSONs = (json1, json2) => {
+        if (json1 == null) {
+            return json2
+        }
+        if (json2 == null) {
+            return json1
+        }
+        for (var key in json2) {
+            json1[key] = json2[key];
+        }
+        return json1;
     }
 
     return (
