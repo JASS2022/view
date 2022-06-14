@@ -7,6 +7,10 @@ import Grid from "@mui/material/Grid";
 import { fontWeight } from "@mui/system";
 import CordBlock from "../components/CordBlock";
 import { useRef } from "react";
+import { DataContext } from '../context/dataprovider.js';
+import React, { useContext } from "react";
+
+
 // import Item from "@mui/material/Item";
 const items = [
   {
@@ -33,6 +37,12 @@ const items = [
   },
 ];
 const Home: NextPage = () => {
+  const { state, fetchData } = useContext(DataContext);
+
+  React.useEffect(() => {
+    fetchData()
+  }, []);
+
   const reffy = useRef();
   const ref1 = useRef();
   const ref2 = useRef();
@@ -46,6 +56,8 @@ const Home: NextPage = () => {
   const ref10 = useRef();
   const ref11 = useRef();
   const ref12 = useRef();
+
+  console.log(state)
 
   // const { top, bottom, left, right } = ref1.current.node
   return (
