@@ -1,0 +1,103 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.photo {
+  height: 700px;
+  width: 700px;
+}
+
+.container {
+  height: 100%;
+  overflow-y: hidden;
+}
+
+.left {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.right {
+  height: 100%;
+  text-align: center;
+  background-color: #fac213;
+  border-radius: 15px;
+}
+
+.header {
+  font-style: normal;
+  font-weight: 900;
+  font-size: 40px;
+  line-height: 116px;
+  text-align: center;
+}
+
+.innerRight {
+  height: 100%;
+  width: 100%;
+}
+
+.duckieData {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 20px;
+  height: 40%;
+  padding: 40px;
+  text-align: left;
+}
+
+.textDiv {
+  width: 280px;
+  height: 50px;
+  padding: 13px;
+  background-color: #d9d9d9;
+  border-radius: 10px;
+}
+
+.innerTitle {
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.stuff {
+  height: 100%;
+}
